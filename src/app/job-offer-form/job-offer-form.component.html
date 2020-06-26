@@ -1,0 +1,41 @@
+<div [ngClass]="{'loading': baseFormController.isLoading}">
+    <img *ngIf="baseFormController.isLoading" src="../../assets/loader.gif" />
+    <div *ngIf="!baseFormController.isLoading" class="ui-fluid" [formGroup]="formGroup">
+        <div class="p-field">
+            <label class="form-label" for="name">Job Offer Name</label>
+            <input id="name" type="text" pInputText formControlName="name"> 
+        </div>
+        <div class="p-field">
+            <label class="form-label" for="id">Id</label>
+            <input id="id" type="text" pInputText formControlName="id"> 
+        </div>
+        <div class="p-field">
+            <label class="form-label" for="description">Description</label>
+            <p-editor id="description" [style]="{'height':'120px'}" formControlName="description"></p-editor>
+        </div>
+        <div class="p-field">
+            <label class="form-label" for="skills">Skills</label>
+            <p-pickList
+                id="skills"
+                [responsive]="true"
+                sourceHeader="All skills"
+                targetHeader="Required skills"
+                [source]="sourceSkills"
+                [target]="targetSkills"
+                [showSourceControls]="false"
+                [showTargetControls]="false"
+                sourceFilterPlaceholder="Search by name"
+                targetFilterPlaceholder="Search by name"
+                filterBy="name"
+                dragdrop="true"
+                (onMoveToTarget)="changeTarget($event)">
+
+                <ng-template let-skill pTemplate="item">
+                    <div class="ui-helper-clearfix">
+                        <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{skill.name}}</div>
+                    </div>
+                </ng-template>
+            </p-pickList>
+        </div>
+    </div>
+</div>
