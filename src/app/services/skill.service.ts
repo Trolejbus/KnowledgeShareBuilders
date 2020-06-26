@@ -74,6 +74,8 @@ export class SkillService {
     public async getAll(): Promise<Skill[]> {
         return new Promise((resolve) => {
             setTimeout(() => {
+				console.log("skill loaded");
+
                 resolve(this.skills.filter(f => true));
             }, 1000);
         });

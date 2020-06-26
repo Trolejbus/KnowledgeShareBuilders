@@ -9,6 +9,13 @@ import { SkillType } from '../models/skill.model';
 })
 export class ProjectManagerFormComponent implements OnInit {
 
+	public projectManagerConfig: OfferFormConfigModel = {
+		skillType: SkillType.Soft,
+		actions: [
+			(opt) => opt.on(event => event.itemValueChanged("name")).do((value, act) => { act.setValue("id", value + "_PM_ID") })
+		]
+	}
+
     constructor() { }
 
     ngOnInit(): void {

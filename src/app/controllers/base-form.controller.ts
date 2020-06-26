@@ -10,11 +10,9 @@ export class BaseFormController {
 
     constructor(private config: OfferFormConfigModel) {
 
-    }
-}
-
-
-    /*public registerSubcontroller(subcontroller: BaseSubcontroller): void {
+	}
+	
+	public registerSubcontroller(subcontroller: BaseSubcontroller): void {
       
         if (this.subcontrollers.some(s => s.name == subcontroller.name)) {
             throw new Error("Subcontroller with given name exists");
@@ -24,9 +22,9 @@ export class BaseFormController {
         if (subcontroller.init != null) {
             subcontroller.init(this.config);
         }
-    }
-
-    public async load(): Promise<void> {
+	}
+	
+	public async loadAllSubcontrollers(): Promise<void> {
 
         this._isLoading = true;
         
@@ -40,8 +38,19 @@ export class BaseFormController {
         }
         await Promise.all(promises);
         this._isLoading = false;
+	}
+	
+	public get isLoading(): boolean {
+        return this._isLoading;
+    }
+}
+
+
+    /*
+
+    public async load(): Promise<void> {
+
+        
     }
 
-    public get isLoading(): boolean {
-        return this._isLoading;
-    }*/
+    */

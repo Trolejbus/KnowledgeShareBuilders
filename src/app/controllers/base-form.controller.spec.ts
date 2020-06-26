@@ -1,6 +1,6 @@
 import { BaseFormController } from "./base-form.controller";
-import { IBaseSubcontroller } from '../interfaces/ibase-subcontroller.interface';
 import { LoadOperations } from '../models/load-operations.model';
+import { BaseSubcontroller } from './base-subcontroller';
 
 describe('base-form.controller test', () => {
     let baseFormController: BaseFormController;
@@ -12,7 +12,7 @@ describe('base-form.controller test', () => {
     it('test registering', async () => {
         let test1 = new TestSubController1();
         baseFormController.registerSubcontroller(test1);
-        expect((baseFormController as any).subcontrollers as IBaseSubcontroller[])
+        expect((baseFormController as any).subcontrollers as BaseSubcontroller)
             .toContain(test1);
         expect(test1.inited).toBeTrue();
     });
@@ -31,7 +31,7 @@ describe('base-form.controller test', () => {
         let test1 = new TestSubController1();
         baseFormController.registerSubcontroller(test1);
         expect(test1.loaded).toBeFalse();
-        await baseFormController.load();
+        await baseFormController.loadAllSubcontrollers();
         expect(test1.loaded).toBeTrue();
     });
 
@@ -48,7 +48,7 @@ describe('base-form.controller test', () => {
         baseFormController.registerSubcontroller(test13);
 
         let t0 = performance.now();      
-        await baseFormController.load();       
+        await baseFormController.loadAllSubcontrollers();       
         let t1 = performance.now();
         
         let elapsedTime = t1 - t0;
@@ -64,7 +64,7 @@ describe('base-form.controller test', () => {
         baseFormController.registerSubcontroller(test2);
 
         let t0 = performance.now();      
-        await baseFormController.load();       
+        await baseFormController.loadAllSubcontrollers();       
         let t1 = performance.now();
         
         let elapsedTime = t1 - t0;
@@ -84,7 +84,7 @@ describe('base-form.controller test', () => {
         baseFormController.registerSubcontroller(test4);
 
         let t0 = performance.now();      
-        await baseFormController.load();       
+        await baseFormController.loadAllSubcontrollers();       
         let t1 = performance.now();
         
         let elapsedTime = t1 - t0;
@@ -93,7 +93,7 @@ describe('base-form.controller test', () => {
     });
 });
 
-class TestSubController1 implements IBaseSubcontroller {
+class TestSubController1 extends BaseSubcontroller {
     public name: string = "test1";
     public loaded: boolean = false;
     public inited: boolean = false;
@@ -112,7 +112,7 @@ class TestSubController1 implements IBaseSubcontroller {
     }
 }
 
-class TestSubController2 implements IBaseSubcontroller {
+class TestSubController2 extends BaseSubcontroller {
     public name: string = "test2";
 
     async load(opt: LoadOperations): Promise<void> {
@@ -125,7 +125,7 @@ class TestSubController2 implements IBaseSubcontroller {
     }
 }
 
-class TestSubController3 implements IBaseSubcontroller {
+class TestSubController3 extends BaseSubcontroller {
     public name: string = "test3";
 
     async load(opt: LoadOperations): Promise<void> {
@@ -137,7 +137,7 @@ class TestSubController3 implements IBaseSubcontroller {
     }
 }
 
-class TestSubController4 implements IBaseSubcontroller {
+class TestSubController4 extends BaseSubcontroller {
     public name: string = "test4";
 
     async load(opt: LoadOperations): Promise<void> {

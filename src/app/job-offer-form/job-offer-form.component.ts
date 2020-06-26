@@ -6,6 +6,8 @@ import { OfferFormConfigModel } from '../config/offer-form-config.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActionsSubcontroller } from '../controllers/actions.controller';
 import { FormGroupSubController } from '../controllers/form-group.controller';
+import { BranchSubcontroller } from '../controllers/branch.controller';
+import { BranchInfoSubcontroller } from '../controllers/branch-info.controller';
 
 @Component({
     selector: 'app-job-offer-form',
@@ -18,12 +20,27 @@ export class JobOfferFormComponent implements OnInit {
 
     public sourceSkills: Skill[] = [];
     public targetSkills: Skill[] = [];
-    public formGroup: FormGroup;
+	
+	@Input()
+	public config: OfferFormConfigModel = {};
 
-    constructor() { }
+	constructor(private skillSubcontroller: SkillSubcontroller,
+		private branchSubcontroller: BranchSubcontroller,
+		private branchInfoSubcontroller: BranchInfoSubcontroller,
+		private actionsSubcontroller: ActionsSubcontroller,
+		private formGroupSubcontroller: FormGroupSubController) { }
 
     async ngOnInit(): Promise<void> {
-        this.buildFormGroup();
+
+		this.baseFormController = new BaseFormController(this.config);
+		this.baseFormController.registerSubcontroller(this.skillSubcontroller);
+		this.baseFormController.registerSubcontroller(this.branchSubcontroller);
+		this.baseFormController.registerSubcontroller(this.branchInfoSubcontroller);
+		this.baseFormController.registerSubcontroller(this.formGroupSubcontroller);
+		this.baseFormController.registerSubcontroller(this.actionsSubcontroller);
+
+		await this.baseFormController.loadAllSubcontrollers();
+		this.sourceSkills = this.skillSubcontroller.skills;
     }
 
     public changeTarget(skills: any): void {
@@ -31,23 +48,16 @@ export class JobOfferFormComponent implements OnInit {
     }
 
     public get isLoading(): boolean {
-        return false;
-    }
-
-    private buildFormGroup(): void {
-        this.formGroup = new FormGroup({
-            name: new FormControl("", Validators.required),
-            id: new FormControl(),
-            description: new FormControl(),
-            skills: new FormControl([]),
-        });
-    }
+        return this.baseFormController.isLoading;
+	}
+	
+	public get formGroup(): FormGroup {
+		return this.formGroupSubcontroller.formGroup;
+	}
 }
 
 /*
-@Input()
-public config: OfferFormConfigModel = {};
 
-this.baseFormController = new BaseFormController(this.config);
+
  
 */

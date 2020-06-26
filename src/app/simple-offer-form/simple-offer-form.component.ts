@@ -7,7 +7,14 @@ import { OfferFormConfigModel } from '../config/offer-form-config.model';
   styleUrls: ['./simple-offer-form.component.scss']
 })
 export class SimpleOfferFormComponent implements OnInit {
-    constructor() { }
+
+	public simpleConfig: OfferFormConfigModel = {
+		actions: [
+			(opt) => opt.on(event => event.itemValueChanged("name")).do((value, act) => { act.setValue("id", value + "_ID") })
+		]
+	}
+
+	constructor() { }
 
     ngOnInit(): void {
     }

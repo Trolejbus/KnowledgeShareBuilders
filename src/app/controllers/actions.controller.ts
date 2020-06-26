@@ -10,16 +10,18 @@ export class ActionsSubcontroller extends BaseSubcontroller {
 
     constructor(private eventsService: EventsService) {
         super();
-    }
-
-}
-
-/*
-    public async load(opt: LoadOperations): Promise<void> {
+	}
+	
+	public async load(opt: LoadOperations): Promise<void> {
         let actions = this.config.actions ?? [];
         let actionStart = new ActionStart(this.eventsService);
         for (let action of actions) {
             action(actionStart);
         }
     }
+
+}
+
+/*
+    
 */

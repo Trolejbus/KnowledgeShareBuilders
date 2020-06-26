@@ -11,10 +11,9 @@ export class FormGroupSubController extends BaseSubcontroller {
 
     constructor(private eventsService: EventsService) {
         super();
-    }
-}
-
-    /*public async load(opt: LoadOperations): Promise<void> {
+	}
+	
+	public async load(opt: LoadOperations): Promise<void> {
         this.buildFormGroup();
         this.eventsService.enabledChange.subscribe(s => {
             let formControl = this.formGroup.get(s.key);
@@ -47,4 +46,5 @@ export class FormGroupSubController extends BaseSubcontroller {
             .subscribe(s => this.eventsService.valueChangeSubject.next({ key: "description", value: s }));
         this.formGroup.get("skills").valueChanges
             .subscribe(s => this.eventsService.valueChangeSubject.next({ key: "skills", value: s }));
-    }*/
+    }
+}

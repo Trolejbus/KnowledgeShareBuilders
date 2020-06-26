@@ -4,31 +4,29 @@ import { SkillService } from '../services/skill.service';
 import { Injectable } from '@angular/core';
 import { OfferFormConfigModel } from '../config/offer-form-config.model';
 import { BaseSubcontroller } from './base-subcontroller';
+import { BranchSubcontroller } from './branch.controller';
 
 @Injectable()
-export class SkillSubcontroller extends BaseSubcontroller {
-	public name: string = "skills";
-	public skills: Skill[];
-	private skillType: SkillType;
+export class BranchInfoSubcontroller extends BaseSubcontroller {
+	public name: string = "branch-info";
 
-	constructor(private skillService: SkillService) {
-        super();
-    }
+	constructor(private branchSubcontroller: BranchSubcontroller) {
+		super();
+	}
 
 	public init?(config: OfferFormConfigModel): void {
-		this.skillType = config.skillType;
 	}
 
 	public async load(opt: LoadOperations): Promise<void> {
-		if(this.skillType == null) {
-            this.skills = await this.skillService.getAll();
-            console.log("all skills loaded");
+		await opt.waitFor("branch");
 
-        }
-        else {
-            this.skills = await this.skillService.getByType(this.skillType);
-            console.log(`skills for type ${this.skillType} loaded`);
-        }
+		return new Promise<void>((resolve) => {
+			setTimeout(() => {
+				console.log("branch info loaded");
+				console.log("Branch loaded? " + this.branchSubcontroller.loaded)
+				resolve();
+			}, 200);
+		});
 	}
 }
 
@@ -47,6 +45,14 @@ export class SkillSubcontroller extends BaseSubcontroller {
     }
 
     public async load(opt: LoadOperations): Promise<void> {
- 
+        if(this.skillsType == null) {
+            this.skills = await this.skillService.getAll();
+            console.log("all skills loaded");
+
+        }
+        else {
+            this.skills = await this.skillService.getByType(this.skillsType);
+            console.log(`skills for type ${this.skillsType} loaded`);
+        }
 	}
 	*/

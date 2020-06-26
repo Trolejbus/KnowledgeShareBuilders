@@ -17,6 +17,8 @@ import { ProjectManagerFormComponent } from './project-manager-form/project-mana
 import { ActionsSubcontroller } from './controllers/actions.controller';
 import { EventsService } from './services/events.service';
 import { FormGroupSubController } from './controllers/form-group.controller';
+import { BranchSubcontroller } from './controllers/branch.controller';
+import { BranchInfoSubcontroller } from './controllers/branch-info.controller';
 
 @NgModule({
     declarations: [
@@ -42,7 +44,9 @@ import { FormGroupSubController } from './controllers/form-group.controller';
         SkillService,
         ActionsSubcontroller,
         EventsService,
-        FormGroupSubController,
+		FormGroupSubController,
+		BranchSubcontroller,
+		BranchInfoSubcontroller,
     ],
     bootstrap: [AppComponent],  
 })
