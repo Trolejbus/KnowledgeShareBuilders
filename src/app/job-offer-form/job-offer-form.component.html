@@ -1,6 +1,6 @@
-<div [ngClass]="{'loading': baseFormController.isLoading}">
-    <img *ngIf="baseFormController.isLoading" src="../../assets/loader.gif" />
-    <div *ngIf="!baseFormController.isLoading" class="ui-fluid" [formGroup]="formGroup">
+<div [ngClass]="{'loading': isLoading}">
+    <img *ngIf="isLoading" src="../../assets/loader.gif" />
+    <div *ngIf="!isLoading" class="ui-fluid" [formGroup]="formGroup">
         <div class="p-field">
             <label class="form-label" for="name">Job Offer Name</label>
             <input id="name" type="text" pInputText formControlName="name"> 

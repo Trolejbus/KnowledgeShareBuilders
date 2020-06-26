@@ -7,8 +7,13 @@ import { OfferFormConfigModel } from '../config/offer-form-config.model';
   styleUrls: ['./simple-offer-form.component.scss']
 })
 export class SimpleOfferFormComponent implements OnInit {
-    
-    public simpleConfig: OfferFormConfigModel = {
+    constructor() { }
+
+    ngOnInit(): void {
+    }
+}
+
+   /* public simpleConfig: OfferFormConfigModel = {
         actions: [
             (opt) => {
                 opt.on(filter => filter.itemValueChanged("name"))
@@ -16,10 +21,5 @@ export class SimpleOfferFormComponent implements OnInit {
             },
         ]
     }
-
-    constructor() { }
-
-    ngOnInit(): void {
-    }
-
-}
+*/
+    

@@ -9,6 +9,14 @@ import { SkillType } from '../models/skill.model';
 })
 export class ProjectManagerFormComponent implements OnInit {
 
+    constructor() { }
+
+    ngOnInit(): void {
+    }
+
+}
+
+/*
     public projectManagerConfig: OfferFormConfigModel = {
         skillType: SkillType.Soft,
         actions: [
@@ -21,10 +29,4 @@ export class ProjectManagerFormComponent implements OnInit {
             },
         ]
     }
-
-    constructor() { }
-
-    ngOnInit(): void {
-    }
-
-}
+*/

@@ -11,8 +11,10 @@ export class BaseFormController {
     constructor(private config: OfferFormConfigModel) {
 
     }
+}
 
-    public registerSubcontroller(subcontroller: BaseSubcontroller): void {
+
+    /*public registerSubcontroller(subcontroller: BaseSubcontroller): void {
       
         if (this.subcontrollers.some(s => s.name == subcontroller.name)) {
             throw new Error("Subcontroller with given name exists");
@@ -42,5 +44,4 @@ export class BaseFormController {
 
     public get isLoading(): boolean {
         return this._isLoading;
-    }
-}
+    }*/

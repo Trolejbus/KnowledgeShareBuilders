@@ -12,6 +12,9 @@ export class ActionsSubcontroller extends BaseSubcontroller {
         super();
     }
 
+}
+
+/*
     public async load(opt: LoadOperations): Promise<void> {
         let actions = this.config.actions ?? [];
         let actionStart = new ActionStart(this.eventsService);
@@ -19,5 +22,4 @@ export class ActionsSubcontroller extends BaseSubcontroller {
             action(actionStart);
         }
     }
-
-}
+*/
